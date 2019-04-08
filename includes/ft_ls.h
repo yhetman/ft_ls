@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 16:37:00 by yhetman           #+#    #+#             */
-/*   Updated: 2019/04/08 20:03:29 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/04/08 21:29:08 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,6 @@
 # include <sys/xattr.h>
 # include <sys/stat.h>
 # include <sys/acl.h>
-
-typedef struct  s_ls
-{
-    t_flags     flags;
-    t_arg       **args;
-}               t_ls;
 
 typedef struct  s_arguments
 {
@@ -46,7 +40,7 @@ typedef struct  s_flags
 /************   END OF MANDATORY PART  ************/
 
    bool         g;  //  (-g)    available for compatibility with POSIX; it is used to display the group name in the long format output;
-   bool         c;  //  (-c)    use time whem file status was last chenged;
+   bool         c;  //  (-c)    use time when file status was last chenged;
    bool         aa; //  (-A)    list all entries except for . and ..  ;
    bool         ll; //  (-L)    follow all symbolic links to final target and list the file or directory;
    bool         cc; //  (-C)    multi-column output;
@@ -55,5 +49,11 @@ typedef struct  s_flags
    bool         f;  //  (-f)    output is not sorted, this option turns on -a option;
    bool         d;  //  (-d)    directories are listed as plain files (not searched recursively);
 }               t_flags;
+
+typedef struct  s_ls
+{
+    t_flags     flags;
+    t_arg       **args;
+}               t_ls;
 
 #endif

@@ -6,20 +6,20 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 16:39:21 by yhetman           #+#    #+#             */
-/*   Updated: 2019/04/09 15:21:48 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/04/09 19:56:37 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
 
-static void     free_ls(t_ls **ls)
+static void free_ls(t_ls **ls)
 {
     if (ls == NULL)
         return ;
     else
         ft_memdel((void**)ls);
 }
-static void     print_help(void)
+static void print_help(void)
 {
     ft_printf("\t%{yellow}-l%{eoc}\t%{green}to list in long format;%{eoc}\n\n");
     ft_printf("\t%{yellow}-r%{eoc}\t%{green}to reverse the order of the ");
@@ -32,13 +32,8 @@ static void     print_help(void)
     ft_printf("\t%{yellow}-c%{eoc}\t%{green}use time when file status was last chenged;%{eoc}\n\n");
 
 }
-static void     flag_error(void)
-{
-    ft_printf("\t%{red}Error: Invalid flag!\n Try '--help' to check available flags%{red}\n");
-    exit(EXIT_FAILURE);
-}
 
-static bool     get_bonus_flags(char * str, int x, t_ls *ls)
+static bool get_bonus_flags(char * str, int x, t_ls *ls)
 {
     if (str[x] == 'l')
         return(ls->flags.l = true);
@@ -72,7 +67,7 @@ static bool     get_bonus_flags(char * str, int x, t_ls *ls)
         return(false);   
 }
 
-static bool     get_flags(char *str, t_ls *ls)
+static bool get_flags(char *str, t_ls *ls)
 {
     int x;
 
@@ -94,7 +89,7 @@ static bool     get_flags(char *str, t_ls *ls)
     return(false);
 }
 
-static t_ls     *get_arguments(t_ls *ls, int argc, char **argv)
+static t_ls *get_arguments(t_ls *ls, int argc, char **argv)
 {
     int     x;
 
@@ -106,17 +101,58 @@ static t_ls     *get_arguments(t_ls *ls, int argc, char **argv)
             free_ls(&ls);
             exit(EXIT_FAILURE);
         }
+        else
+            break ;
         x++;
     }
+    if (x < argc)
+        ls->direct = ft_strdup(argv[x]);
+    else   
+        ls->direct = ft_strdup("./");
     return(ls);
+}
+
+static char *find_way(char *way, t_arg *dir)
+{
+
+}
+
+static int  initialization(t_arg *argument)
+{
+    if (argument)
+    {
+        if(!(argument = (t_arg*)malloc(sizeof(t_arg))))
+        {
+            mal_error();
+            return(0);
+        }
+        return(1);
+    }
+    else
+        return(0);
+}
+
+int ft_ls(t_ls *ls)
+{
+    DIR     *fd;
+    t_dir   *direct;
+    t_arg   *memorized;
+    t_arg   *list;
+
+    if (!(fd = opendir(ls->direct)))
+        return(direct_error());
+    if (!initialization(&list))
+        return(init_error());
+    memorized = list;
+    list->path_way = find_way(list->path_way, (t_arg*)list->direct);
 }
 
 int main(int argc, char **argv)
 {
     t_ls    *ls;
 
-    ls = (t_ls *)malloc(sizeof(t_ls));
-    ls = get_arguments(ls, argc, argv);
-
-    return (0);
+    if (!(ls = (t_ls *)malloc(sizeof(t_ls))))
+        mal_error();
+    get_arguments(ls, argc, argv);
+    return (ft_ls(ls));
 }

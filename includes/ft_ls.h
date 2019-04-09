@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 16:37:00 by yhetman           #+#    #+#             */
-/*   Updated: 2019/04/09 17:26:14 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/04/09 19:55:58 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include <sys/xattr.h>
 # include <sys/stat.h>
 # include <sys/acl.h>
+
+typedef struct  dirent t_dir;
 
 typedef struct  s_time
 {
@@ -67,7 +69,14 @@ typedef struct  s_arguments
     float       *blocks;
     struct stat *buff;
     t_ls        *info;
-    t_arg       *direct;
-    t_arg       *next_arg;
+    struct s_arguments *direct;
+    struct s_arguments *next_arg;
 }               t_arg;
+
+/******     error.c     *****/
+void    mal_error(void);
+void    flag_error(void);
+int     direct_error(void);
+int     init_error(void);
+
 #endif

@@ -78,5 +78,5 @@ void    mal_error(void);
 void    flag_error(void);
 int     direct_error(void);
 int     init_error(void);
-
+bool    get_flags(char *str, t_ls *ls);
 #endif

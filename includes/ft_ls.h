@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 16:37:00 by yhetman           #+#    #+#             */
-/*   Updated: 2019/04/08 21:29:08 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/04/09 17:26:14 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,12 @@
 # include <sys/stat.h>
 # include <sys/acl.h>
 
-typedef struct  s_arguments
+typedef struct  s_time
 {
-    char        *name;
-
-}               t_arg;
+    char        *day;
+    char        *month;
+    char        *year;
+}               t_time;
 
 typedef struct  s_flags
 {
@@ -53,7 +54,20 @@ typedef struct  s_flags
 typedef struct  s_ls
 {
     t_flags     flags;
-    t_arg       **args;
+    int         longest;
+    int         longest_w;
+    int         longets_g;
+    char        *direct;
 }               t_ls;
 
+typedef struct  s_arguments
+{
+    char        *name;
+    char        *path_way;
+    float       *blocks;
+    struct stat *buff;
+    t_ls        *info;
+    t_arg       *direct;
+    t_arg       *next_arg;
+}               t_arg;
 #endif

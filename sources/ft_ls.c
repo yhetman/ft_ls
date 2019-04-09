@@ -135,6 +135,33 @@ static int  initialization(t_arg *argument)
         return(0);
 }
 
+bool    find_hidden_fd(t_ls *ls, char *line)
+{
+    if (ls->flags.a)
+        return(false);
+    else if (*str == '.')
+        return(true);
+    else
+        return(false);
+}
+
+void addition(t_arg *list, t_dir *direct, t_arg **list_ptr)
+{
+    t_arg   *curr;
+
+    if((*list_ptr)->name)
+    {
+        if (!(curr = (t_arg*)malloc(sizeof(t_arg))))
+            mal_error();
+    }
+    (*list_ptr)->next = curr;
+    curr->blocks = (*list_ptr)->blocks;
+    curr->way = (*list_ptr)->way;
+    *list_ptr = (*list_ptr)->next;
+    else
+        return ;
+}
+
 int ft_ls(t_ls *ls)
 {
     DIR     *fd;
@@ -150,8 +177,13 @@ int ft_ls(t_ls *ls)
     list->way = find_way(list->way, ls->direct);
     while ((direct = readdir(fd) || closedir(fd)))
     {
-        //find_hidden_fd();
-
+        if(find_hidden_fd(ls, direct->d_name);
+            continue ;
+        list->info = ls;
+        addition(list, dirent, &list);
+        if (list->next_arg)
+            list = list->next_arg;
+    }
     }
 }
 

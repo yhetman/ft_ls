@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 16:39:21 by yhetman           #+#    #+#             */
-/*   Updated: 2019/04/09 20:09:15 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/04/09 20:35:45 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,7 @@ int ft_ls(t_ls *ls)
     list->way = find_way(list->way, ls->direct);
     while ((direct = readdir(fd) || closedir(fd)))
     {
+        //find_hidden_fd();
 
     }
 }

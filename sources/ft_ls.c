@@ -6,12 +6,19 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 16:39:21 by yhetman           #+#    #+#             */
-/*   Updated: 2019/04/08 21:29:58 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/04/09 15:21:48 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
 
+static void     free_ls(t_ls **ls)
+{
+    if (ls == NULL)
+        return ;
+    else
+        ft_memdel((void**)ls);
+}
 static void     print_help(void)
 {
     ft_printf("\t%{yellow}-l%{eoc}\t%{green}to list in long format;%{eoc}\n\n");
@@ -31,31 +38,38 @@ static void     flag_error(void)
     exit(EXIT_FAILURE);
 }
 
-static void     get_bonus_flags(char * str, int x, t_ls *ls)
+static bool     get_bonus_flags(char * str, int x, t_ls *ls)
 {
+    if (str[x] == 'l')
+        return(ls->flags.l = true);
+    if (str[x] == 'r')
+        return(ls->flags.r = true);
+    if (str[x] == 'R')
+        return(ls->flags.rr = true);
+    if (str[x] == 'a')
+        return(ls->flags.a = true);
+    if (str[x] == 't')
+        return(ls->flags.t = true);
     if (str[x] == 'g')
-        ls->flags.g = true;
+        return(ls->flags.g = true);
     if (str[x] == 'c')
-        ls->flags.c = true;
+        return(ls->flags.c = true);
     if (str[x] == 'A')
-        ls->flags.aa = true;
+        return(ls->flags.aa = true);
     if (str[x] == 'L')
-        ls->flags.ll = true;
+        return(ls->flags.ll = true);
     if (str[x] == 'C')
-        ls->flags.cc = true;
+        return(ls->flags.cc = true);
     if (str[x] == 'G')
-        ls->flags.gg = true;
+        return(ls->flags.gg = true);
     if (str[x] == 'u')
-        ls->flags.u = true;
+        return(ls->flags.u = true);
     if (str[x] == 'f')
-    {
-        ls->flags.f = true;
-        ls->flags.a = true;
-    }
+        return((ls->flags.f = true) && (ls->flags.a = true));
     if (str[x] == 'd')
-        ls->flags.d = true;
+        return(ls->flags.d = true);
     else
-        flag_error();    
+        return(false);   
 }
 
 static bool     get_flags(char *str, t_ls *ls)
@@ -72,17 +86,8 @@ static bool     get_flags(char *str, t_ls *ls)
     {
         while (str[++x])
         {
-            if (str[x] == 'l')
-                ls->flags.l = true;
-            if (str[x] == 'r')
-                ls->flags.r = true;
-            if (str[x] == 'R')
-                ls->flags.rr = true;
-            if (str[x] == 'a')
-                ls->flags.a = true;
-            if (str[x] == 't')
-                ls->flags.t = true;
-            get_bonus_flags(str, x, ls);
+            if (!get_bonus_flags(str, x, ls))
+                flag_error();   
         }
         return(true);
     }
@@ -98,7 +103,7 @@ static t_ls     *get_arguments(t_ls *ls, int argc, char **argv)
     {
         if (!get_flags(argv[x], ls))
         {
-            //free_ls(ls);
+            free_ls(&ls);
             exit(EXIT_FAILURE);
         }
         x++;

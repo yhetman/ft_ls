@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 16:39:21 by yhetman           #+#    #+#             */
-/*   Updated: 2019/04/09 19:56:37 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/04/09 20:09:15 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,9 +112,12 @@ static t_ls *get_arguments(t_ls *ls, int argc, char **argv)
     return(ls);
 }
 
-static char *find_way(char *way, t_arg *dir)
+static char *find_way(char *way, char *dir)
 {
-
+    if (!way || (way && !*way))
+        return(way = ft_strdup(dir));
+    else
+        return(way = ft_strjoin(ft_strjoin(way, "/"), dir));
 }
 
 static int  initialization(t_arg *argument)
@@ -144,7 +147,11 @@ int ft_ls(t_ls *ls)
     if (!initialization(&list))
         return(init_error());
     memorized = list;
-    list->path_way = find_way(list->path_way, (t_arg*)list->direct);
+    list->way = find_way(list->way, ls->direct);
+    while ((direct = readdir(fd) || closedir(fd)))
+    {
+
+    }
 }
 
 int main(int argc, char **argv)

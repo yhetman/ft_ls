@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 16:37:00 by yhetman           #+#    #+#             */
-/*   Updated: 2019/04/09 19:55:58 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/04/09 20:15:52 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ typedef struct  s_ls
 typedef struct  s_arguments
 {
     char        *name;
-    char        *path_way;
+    char        *way;
     float       *blocks;
     struct stat *buff;
     t_ls        *info;

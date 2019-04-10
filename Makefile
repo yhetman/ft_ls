@@ -6,7 +6,7 @@
 #    By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/10 01:20:26 by yhetman           #+#    #+#              #
-#    Updated: 2019/04/10 20:50:09 by yhetman          ###   ########.fr        #
+#    Updated: 2019/04/10 20:57:43 by yhetman          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,18 +45,15 @@ $(OBJ_PATH):
 $(OBJ_PATH)%.o: %.c $(HDRS)
 	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
 
-clean: 
+clean: mclean
 	make clean -C $(LIB_PATH)
-	rm -rf $(OBJ_PATH)
 fclean: mfclean
 	make fclean -C $(LIB_PATH)
-	rm -rf $(OBJ_PATH)
-	rm -f $(NAME)
 re: fclean all
 
-#mclean:
-#	rm -rf $(OBJ_PATH)
-#mfclean:
-#	rm -f $(NAME)
-#	rm -rf $(OBJ_PATH)
-#mre: mfclean all
+mclean:
+	rm -rf $(OBJ_PATH)
+mfclean:
+	rm -f $(NAME)
+	rm -rf $(OBJ_PATH)
+mre: mfclean all

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yhetman <yhetman@student.unit.ua>          +#+  +:+       +#+         #
+#    By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/10 01:20:26 by yhetman           #+#    #+#              #
-#    Updated: 2019/04/10 02:04:40 by yhetman          ###   ########.fr        #
+#    Updated: 2019/04/10 20:40:40 by yhetman          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,23 +37,23 @@ $(NAME): $(LIB) $(OBJ_PATH) $(OBJS)
 	$(CC) $(CFLAGS) $(IFLAGS) $(OBJS) $(LIB) -o $(NAME)
 
 $(LIB):
-	@make -C $(LIB_PATH)
+	make -C $(LIB_PATH)
 
 $(OBJ_PATH):
-	@mkdir -p $(OBJ_PATH)$(SRC_PATH)
+	mkdir -p $(OBJ_PATH)$(SRC_PATH)
 
 $(OBJ_PATH)%.o: %.c $(HDRS)
-	@$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
 
 clean: mclean
-	@make clean -C $(LIB_PATH)
+	make clean -C $(LIB_PATH)
 fclean: mfclean
-	@make fclean -C $(LIB_PATH)
+	make fclean -C $(LIB_PATH)
 re: fclean all
 
 mclean:
-	@rm -rf $(OBJ_PATH)
+	rm -rf $(OBJ_PATH)
 mfclean:
-	@rm -f $(NAME)
-	@qrm -rf $(OBJ_PATH)
+	rm -f $(NAME)
+	rm -rf $(OBJ_PATH)
 mre: mfclean all

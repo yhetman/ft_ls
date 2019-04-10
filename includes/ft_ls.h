@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ls.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhetman <yhetman@student.unit.ua>          +#+  +:+       +#+        */
+/*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 16:37:00 by yhetman           #+#    #+#             */
-/*   Updated: 2019/04/10 04:46:05 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/04/10 20:31:25 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ typedef struct  s_ls
     t_flags     flags;
     int         longest;
     int         longest_w;
-    int         longets_g;
+    int         longest_g;
     char        *direct;
 }               t_ls;
 
@@ -140,5 +140,6 @@ void    mal_error(void);
 void    flag_error(void);
 int     direct_error(void);
 int     init_error(void);
+void    link_error(void);
 bool    get_flags(char *str, t_ls *ls);
 #endif

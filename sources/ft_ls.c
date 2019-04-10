@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ls.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhetman <yhetman@student.unit.ua>          +#+  +:+       +#+        */
+/*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 16:39:21 by yhetman           #+#    #+#             */
-/*   Updated: 2019/04/10 05:05:31 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/04/10 20:40:35 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,11 @@ static char *find_way(char *way, char *dir)
         return(way = ft_strjoin(ft_strjoin(way, "/"), dir));
 }
 
-static int  initialization(t_arg *argument)
+static int  initialization(t_arg **argument)
 {
     if (argument)
     {
-        if(!(argument = (t_arg*)malloc(sizeof(t_arg))))
+        if(!(*argument = (t_arg*)malloc(sizeof(t_arg))))
         {
             mal_error();
             return(0);
@@ -70,7 +70,7 @@ bool    find_hidden_fd(t_ls *ls, char *line)
 {
     if (ls->flags.a)
         return(false);
-    else if (*str == '.')
+    else if (*line == '.')
         return(true);
     else
         return(false);
@@ -117,17 +117,19 @@ void    doublicate_info(t_arg *ls_list, t_dir *dir,
         return ;
 }
 
-t_arg    *addition(t_arg *ls_list, t_dir *direct, t_arg **ls_list_ptr)
+void    addition(t_arg *ls_list, t_dir *direct, t_arg **ls_list_ptr)
 {
     t_arg   *curr;
 
-    if((*ls_list_ptr)->name)
+    if ((*ls_list_ptr)->name)
+    {
         if (!(curr = (t_arg*)malloc(sizeof(t_arg))))
             mal_error();
-    (*ls_list_ptr)->next = curr;
-    curr->blocks = (*ls_list_ptr)->blocks;
-    curr->way = (*ls_list_ptr)->way;
-    *ls_list_ptr = (*ls_list_ptr)->next;
+        (*ls_list_ptr)->next_arg = curr;
+        curr->blocks = (*ls_list_ptr)->blocks;
+        curr->way = (*ls_list_ptr)->way;
+        *ls_list_ptr = (*ls_list_ptr)->next_arg;
+    }
     else
     {
         curr = (*ls_list_ptr);
@@ -151,15 +153,16 @@ int   ft_ls(t_ls *ls)
         return(init_error());
     memorized = ls_list;
     ls_list->way = find_way(ls_list->way, ls->direct);
-    while ((direct = readdir(fd) || closedir(fd)))
+    while ((direct = (t_dir *)readdir(fd)) || closedir(fd))
     {
-        if(find_hidden_fd(ls, direct->d_name));
+        if(find_hidden_fd(ls, direct->d_name))
             continue ;
         ls_list->info = ls;
-        addition(ls_list, dirent, &ls_list);
+        addition(ls_list, direct, &ls_list);
         if (ls_list->next_arg)
             ls_list = ls_list->next_arg;
     }
+    return(0);
 }
 
 int main(int argc, char **argv)

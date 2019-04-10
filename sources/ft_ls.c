@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 16:39:21 by yhetman           #+#    #+#             */
-/*   Updated: 2019/04/10 20:40:35 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/04/10 21:26:05 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static char *find_way(char *way, char *dir)
         return(way = ft_strjoin(ft_strjoin(way, "/"), dir));
 }
 
-static int  initialization(t_arg **argument)
+/* int  initialization(t_arg **argument)
 {
     if (argument)
     {
@@ -65,6 +65,7 @@ static int  initialization(t_arg **argument)
     else
         return(0);
 }
+*/
 
 bool    find_hidden_fd(t_ls *ls, char *line)
 {
@@ -104,7 +105,7 @@ bool    statistic(t_arg *curr)
     return(true);
 }
 
-void    doublicate_info(t_arg *ls_list, t_dir *dir,
+static void    doublicate_info(t_arg *ls_list, t_dir *dir,
             t_arg **ls_list_ptr, t_arg *curr)
 {
     curr->name = ft_strdup(dir->d_name);
@@ -140,7 +141,12 @@ void    addition(t_arg *ls_list, t_dir *direct, t_arg **ls_list_ptr)
     doublicate_info(ls_list, direct, ls_list_ptr, curr);
 }
 
-int   ft_ls(t_ls *ls)
+void    begin_sorting(t_arg **arg_list)
+{
+  //add types of sorting by flags   
+}
+
+bool   ft_ls(t_ls *ls)
 {
     DIR     *fd;
     t_dir   *direct;
@@ -149,7 +155,7 @@ int   ft_ls(t_ls *ls)
 
     if (!(fd = opendir(ls->direct)))
         return(direct_error());
-    if (!initialization(&ls_list))
+    if (!(ls_list = (t_arg*)malloc(sizeof(t_arg))))
         return(init_error());
     memorized = ls_list;
     ls_list->way = find_way(ls_list->way, ls->direct);
@@ -162,7 +168,8 @@ int   ft_ls(t_ls *ls)
         if (ls_list->next_arg)
             ls_list = ls_list->next_arg;
     }
-    return(0);
+    begin_sorting(&memorized);
+    return(true);
 }
 
 int main(int argc, char **argv)
@@ -172,5 +179,8 @@ int main(int argc, char **argv)
     if (!(ls = (t_ls *)malloc(sizeof(t_ls))))
         mal_error();
     get_arguments(ls, argc, argv);
-    return (ft_ls(ls));
+    if (ft_ls(ls))
+        return (1);
+    else
+        return (0);
 }

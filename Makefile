@@ -6,7 +6,7 @@
 #    By: yhetman <yhetman@student.unit.ua>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/10 01:20:26 by yhetman           #+#    #+#              #
-#    Updated: 2019/04/10 01:30:21 by yhetman          ###   ########.fr        #
+#    Updated: 2019/04/10 02:04:40 by yhetman          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,8 +52,8 @@ fclean: mfclean
 re: fclean all
 
 mclean:
-	rm -rf $(OBJ_PATH)
+	@rm -rf $(OBJ_PATH)
 mfclean:
-	rm -f $(NAME)
-	rm -rf $(OBJ_PATH)
+	@rm -f $(NAME)
+	@qrm -rf $(OBJ_PATH)
 mre: mfclean all

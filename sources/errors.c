@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yhetman <yhetman@student.unit.ua>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 19:53:43 by yhetman           #+#    #+#             */
-/*   Updated: 2019/04/09 19:56:07 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/04/10 03:21:03 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
+
+void link_error(void)
+{
+	ft_printf("%\t{red}ERROR:\t Linkers failed! %s%{eoc}\n", strerror(errno));
+	exit(EXIT_FAILURE);
+}
 
 void mal_error(void)
 {

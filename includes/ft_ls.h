@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ls.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yhetman <yhetman@student.unit.ua>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 16:37:00 by yhetman           #+#    #+#             */
-/*   Updated: 2019/04/09 20:35:46 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/04/10 03:20:56 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,56 @@
 
 # include "../libft/includes/libft.h"
 # include <dirent.h>
+/*
+    int             closedir(DIR *);
+    DIR             *opendir(const char *);
+    struct dirent   *readdir(DIR *);
+*/
 # include <grp.h>
 # include <pwd.h>
 # include <uuid/uuid.h>
 # include <sys/xattr.h>
 # include <sys/stat.h>
+/*
+    int stat(const char *pathname, struct stat *statbuf);
+    int lstat(const char *pathname, struct stat *statbuf);
+*/
+
 # include <sys/acl.h>
 
-typedef struct  dirent t_dir;
+typedef struct  dirent      t_dir;
+/*
+    {
+        ino_t   d_ino    -   file serial number
+        char    *d_name  -  name of entry  
+    }
+*/
 
+//  http://man7.org/linux/man-pages/man2/stat.2.html
+
+typedef struct  stat        t_stat;
+/*
+    {
+        dev_t     st_dev;     -     ID of device containing file 
+        ino_t     st_ino;     -     Inode number 
+        mode_t    st_mode;    -     File type and mode 
+        nlink_t   st_nlink;   -     Number of hard links 
+        uid_t     st_uid;     -     User ID of owner 
+        gid_t     st_gid;     -     Group ID of owner 
+        dev_t     st_rdev;    -     Device ID (if special file) 
+        off_t     st_size;    -     Total size, in bytes 
+        blksize_t st_blksize; -     Block size for filesystem I/O 
+        blkcnt_t  st_blocks;  -     Number of 512B blocks allocated 
+    }
+*/
+typedef struct  timespec    t_timedif;
+/*
+    {
+        st_atim     -   time of last access
+        st_mtim     -   time of last modification
+        st_ctim     -   time of last status change
+    }
+*/
 typedef struct  s_time
 {
     char        *day;
@@ -67,7 +108,7 @@ typedef struct  s_arguments
     char        *name;
     char        *way;
     float       *blocks;
-    struct stat *buff;
+    t_stat      *buff;
     t_ls        *info;
     struct s_arguments *direct;
     struct s_arguments *next_arg;

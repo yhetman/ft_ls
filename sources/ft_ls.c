@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.unit.ua>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 16:39:21 by yhetman           #+#    #+#             */
-/*   Updated: 2019/04/10 03:23:09 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/04/10 05:05:31 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,15 +78,30 @@ bool    find_hidden_fd(t_ls *ls, char *line)
 
 bool    statistic(t_arg *curr)
 {
-    int     x;
-    t_stat  *buff;
+    int         len;
+    t_stat      *buff;
+    t_passwd    *p;
+    t_group     *grp;
 
-    if (!(buff = (t_stat*)malloc(sizeof(t_stat))))
+    if (!(buff = (t_stat*)malloc(sizeof(t_stat)))
+        || !(p = (t_passwd*)malloc(sizeof(t_passwd)))
+        || !(grp = (t_group*)malloc(sizeof(t_group))))
         mal_error();
     if (lstat(find_way(curr->way, curr->name), buff) < 0)
         link_error();
     curr->buff = buff;
-    // to be continued ...
+    len = ft_nbrlen(curr->buff->st_size);
+    p = getpwuid(curr->buff->st_uid);
+    if (curr->info->longest < len)
+        curr->info->longest = len;
+    len = ft_strlen(p->pw_name);
+    if (curr->info->longest_w < len)
+        curr->info->longest_w = len;
+    grp = getgrgid(curr->buff->st_gid);
+    len = ft_strlen(grp->gr_name);
+    if (curr->info->longest_g < len)
+        curr->info->longest_g = len;
+    return(true);
 }
 
 void    doublicate_info(t_arg *ls_list, t_dir *dir,
@@ -97,7 +112,7 @@ void    doublicate_info(t_arg *ls_list, t_dir *dir,
     curr->info = ls_list->info;
     if (statistic(curr) &&
         (!(find_hidden_fd(ls_list->info, curr->name))))
-            *(cuur->blocks) += (float)curr->buff->st_size / 512;
+            *(curr->blocks) += (float)curr->buff->st_size / 512;
     else
         return ;
 }

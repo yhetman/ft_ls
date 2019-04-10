@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.unit.ua>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 16:37:00 by yhetman           #+#    #+#             */
-/*   Updated: 2019/04/10 03:20:56 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/04/10 04:46:05 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,27 @@ typedef struct  timespec    t_timedif;
         st_atim     -   time of last access
         st_mtim     -   time of last modification
         st_ctim     -   time of last status change
+    }
+*/
+typedef struct  passwd      t_passwd;
+/*
+    {
+        char   *pw_name;       -     username
+        char   *pw_passwd;     -     user password
+        uid_t   pw_uid;        -     user ID
+        gid_t   pw_gid;        -     group ID
+        char   *pw_gecos;      -     user information
+        char   *pw_dir;        -     home directory
+        char   *pw_shell;      -     shell program
+    }
+*/
+typedef struct  group       t_group;
+/*
+    {
+        char    *gr_name            The name of the group. 
+        gid_t   gr_gid  Numerical group ID. 
+        char    **gr_mem  Pointer to a null-terminated array of character 
+                pointers to member names. 
     }
 */
 typedef struct  s_time

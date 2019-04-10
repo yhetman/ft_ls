@@ -1,5 +1,8 @@
 {
 	"editor.trimAutoWhitespace": false,
 	"editor.tabCompletion": "on",
-	"zenMode.hideTabs": false
+	"zenMode.hideTabs": false,
+	"files.associations": {
+		"ft_ls.h": "c"
+	}
 }

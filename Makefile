@@ -6,7 +6,7 @@
 #    By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/10 01:20:26 by yhetman           #+#    #+#              #
-#    Updated: 2019/04/10 20:57:43 by yhetman          ###   ########.fr        #
+#    Updated: 2019/04/10 22:38:41 by yhetman          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ IFLAGS :=	-I $(INC_PATH) -I $(LIB_PATH)
 
 LIB :=		$(LIB_PATH)libft.a
 HFILES :=	ft_ls 
-FILES :=	ft_ls flags errors
+FILES :=	ft_ls flags errors sortingss
 
 HDRS :=		$(addprefix $(INC_PATH), $(addsuffix .h, $(HFILES)))
 SRCS :=		$(addprefix $(SRC_PATH), $(addsuffix .c, $(FILES)))

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+         #
+#    By: yhetman <yhetman@student.unit.ua>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/03 15:10:32 by yhetman           #+#    #+#              #
-#    Updated: 2019/03/08 19:58:56 by yhetman          ###   ########.fr        #
+#    Updated: 2019/04/10 03:57:49 by yhetman          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,8 +41,8 @@ LIBFT_FUNCTIONS = ft_putchar	ft_putendl		ft_putstr		\
 				ft_put_uintmax		ft_putwchar	ft_putwstr 		\
 				ft_wstrlen			ft_wstrncpy	ft_wstrsub		\
 				ft_maxlen_base		ft_pow 		ft_strchri		\
-				ft_strjoin_free ft_free_grid   ft_charinstr 	\
-				ft_strclen						ft_printf		\
+				ft_strjoin_free		ft_free_grid ft_charinstr 	\
+				ft_strclen	ft_nbrlen			ft_printf		\
 				ft_buffering	\
 				ft_coloring		\
 				ft_conversion 	\

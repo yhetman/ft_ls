@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 22:36:03 by yhetman           #+#    #+#             */
-/*   Updated: 2019/04/11 21:45:25 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/04/11 21:51:11 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static t_arg	*reverse_order(t_arg *arg_list)
 {
 	t_arg	*sorted;
-	
+
 	if (!(sorted = (t_arg*)malloc(sizeof(t_arg))))
 		mal_error();
 	else
@@ -38,7 +38,7 @@ static t_arg	*reverse_order(t_arg *arg_list)
 static t_arg	*lexic_sorting(t_arg *arg_list)
 {
 	t_arg	*sorted;
-	
+
 	if (!(sorted = (t_arg*)malloc(sizeof(t_arg))))
 		mal_error();
 	else
@@ -85,7 +85,7 @@ static t_arg	*time_sorting(t_arg *arg_list)
 static t_arg	*last_change_sorting(t_arg *arg_list)
 {
 	t_arg	*sorted;
-	
+
 	if (!(sorted = (t_arg*)malloc(sizeof(t_arg))))
 		mal_error();
 	else
@@ -110,7 +110,7 @@ static t_arg	*last_change_sorting(t_arg *arg_list)
 static t_arg	*last_access_sorting(t_arg *arg_list)
 {
 	t_arg	*sorted;
-	
+
 	if (!(sorted = (t_arg*)malloc(sizeof(t_arg))))
 		mal_error();
 	else
@@ -131,7 +131,7 @@ static t_arg	*last_access_sorting(t_arg *arg_list)
 	return (sorted->next_arg);
 }
 
-void	begin_sorting(t_arg **arg_list)
+void			begin_sorting(t_arg **arg_list)
 {
 	if ((*arg_list)->info->flags.r)
 		*arg_list = reverse_order(*arg_list);

@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 22:36:03 by yhetman           #+#    #+#             */
-/*   Updated: 2019/04/11 21:35:12 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/04/11 21:45:25 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,12 +135,12 @@ void	begin_sorting(t_arg **arg_list)
 {
 	if ((*arg_list)->info->flags.r)
 		*arg_list = reverse_order(*arg_list);
-	if ((*arg_list)->info->flags.l)
-		*arg_list = lexic_sorting(*arg_list);
-	if ((*arg_list)->info->flags.t)
+	else if ((*arg_list)->info->flags.t)
 		*arg_list = time_sorting(*arg_list);
-	if ((*arg_list)->info->flags.c)
+	else if ((*arg_list)->info->flags.c)
 		*arg_list = last_change_sorting(*arg_list);
-	if ((*arg_list)->info->flags.u)
+	else if ((*arg_list)->info->flags.u)
 		*arg_list = last_access_sorting(*arg_list);
+	else
+		*arg_list = lexic_sorting(*arg_list);
 }

@@ -6,7 +6,7 @@
 #    By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/10 01:20:26 by yhetman           #+#    #+#              #
-#    Updated: 2019/04/10 22:38:41 by yhetman          ###   ########.fr        #
+#    Updated: 2019/04/11 21:37:57 by yhetman          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,8 @@ CFLAGS :=	-g -Wall -Wextra -Werror
 IFLAGS :=	-I $(INC_PATH) -I $(LIB_PATH)
 
 LIB :=		$(LIB_PATH)libft.a
-HFILES :=	ft_ls 
-FILES :=	ft_ls flags errors sortingss
+HFILES :=	ft_ls structs
+FILES :=	ft_ls flags errors sortings swap_files
 
 HDRS :=		$(addprefix $(INC_PATH), $(addsuffix .h, $(HFILES)))
 SRCS :=		$(addprefix $(SRC_PATH), $(addsuffix .c, $(FILES)))

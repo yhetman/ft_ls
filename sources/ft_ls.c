@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 22:00:17 by yhetman           #+#    #+#             */
-/*   Updated: 2019/04/10 22:36:29 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/04/11 18:55:32 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static t_ls	*get_arguments(t_ls *ls, int argc, char **argv)
 	}
 	if (x < argc)
 		ls->direct = ft_strdup(argv[x]);
-	else   
+	else
 		ls->direct = ft_strdup("./");
 	return(ls);
 }

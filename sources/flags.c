@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 01:31:44 by yhetman           #+#    #+#             */
-/*   Updated: 2019/04/10 22:38:38 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/04/12 20:24:15 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,62 +22,56 @@ static void	print_help(void)
 	ft_printf("\t%{yellow}-t%{eoc}\t%{green}sort by time modified (most recently - first) befor lexic-sort;%{eoc}\n\n");
 	ft_printf("\t%{yellow}-g%{eoc}\t%{green}available for compatibility with POSIX;");
 	ft_printf("it is used to display the group name in the long format output;%{eoc}\n\n");
-	ft_printf("\t%{yellow}-c%{eoc}\t%{green}use time when file status was last chenged;%{eoc}\n\n");
-
+	ft_printf("\t%{yellow}-c%{eoc}\t%{green}use time when file status was last changed;%{eoc}\n\n");
+	exit(EXIT_SUCCESS);
 }
 
-static bool	get_bonus_flags(char * str, int x, t_ls *ls)
+static void	define_flags(char str, t_flags *flags)
 {
-	if (str[x] == 'l')
-		return(ls->flags.l = true);
-	if (str[x] == 'r')
-		return(ls->flags.r = true);
-	if (str[x] == 'R')
-		return(ls->flags.rr = true);
-	if (str[x] == 'a')
-		return(ls->flags.a = true);
-	if (str[x] == 't')
-		return(ls->flags.t = true);
-	if (str[x] == 'g')
-		return(ls->flags.g = true);
-	if (str[x] == 'c')
-		return(ls->flags.c = true);
-	if (str[x] == 'A')
-		return(ls->flags.aa = true);
-	if (str[x] == 'L')
-		return(ls->flags.ll = true);
-	if (str[x] == 'C')
-		return(ls->flags.cc = true);
-	if (str[x] == 'G')
-		return(ls->flags.gg = true);
-	if (str[x] == 'u')
-		return(ls->flags.u = true);
-	if (str[x] == 'f')
-		return((ls->flags.f = true) && (ls->flags.a = true));
-	if (str[x] == 'd')
-		return(ls->flags.d = true);
+	if (str == 'l')
+		flags->l = true;
+	else if (str == 'r')
+		flags->r = true;
+	else if (str == 'R')
+		flags->rr = true;
+	else if (str == 'a')
+		flags->a = true;
+	else if (str == 't')
+		flags->t = true;
+	else if (str == 'g')
+		flags->g = true;
+	else if (str == 'c')
+		flags->c = true;
+	else if (str == 'A')
+		flags->aa = true;
+	else if (str == 'L')
+		flags->ll = true;
+	else if (str == 'C')
+		flags->cc = true;
+	else if (str == 'G')
+		flags->gg = true;
+	else if (str == 'u')
+		flags->u = true;
+	else if (str == 'f')
+		(flags->f = true) && (flags->a = true);
+	else if (str == 'd')
+		flags->d = true;
 	else
-		return(false);
+		return ;
 }
 
-bool		get_flags(char *str, t_ls *ls)
+void		get_flags(char *str, t_ls **ls)
 {
 	int x;
 
-	x = 0;
-	if (ft_strstr(str, "--help"))
-	{
+	x = -1;
+	if (ft_strstr(str, "-help"))
 		print_help();
-		return(false);
-	}
-	if(str[x] == '-')
+	else if (*str == '-')
 	{
-		while (str[++x])
-		{
-			if (!get_bonus_flags(str, x, ls))
-				flag_error();
-		}
-		return(true);
+		while (str[++x] != '\0')
+			define_flags(str[x], &((*ls)->flags));
 	}
-	return(false);
+	else
+		flag_error();
 }

@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 19:39:50 by yhetman           #+#    #+#             */
-/*   Updated: 2019/04/11 19:49:36 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/04/12 15:48:38 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ void	swap_files(t_arg *beg, t_arg *f, t_arg *s)
 			f->next_arg = t;
 			ft_memdel((void**)t);
 		}
+		f = beg->next_arg;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 22:02:40 by yhetman           #+#    #+#             */
-/*   Updated: 2019/04/11 21:35:54 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/04/12 20:41:28 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,7 @@
 /******		error.c			******/
 void	mal_error(void);
 void	flag_error(void);
-int		direct_error(void);
-int		init_error(void);
+bool	direct_error(void);
 void	link_error(void);
 
 /******		sortings.c		******/
@@ -47,7 +46,7 @@ void	begin_sorting(t_arg **arg_list); // -r , -l , -t , -c , -u
 
 
 /******		flags.c			******/
-bool	get_flags(char *str, t_ls *ls);
+void	get_flags(char *str, t_ls **ls);
 
 /******		swap_files.c	******/
 void	swap_files(t_arg *b, t_arg *f, t_arg *s);

@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 22:36:03 by yhetman           #+#    #+#             */
-/*   Updated: 2019/04/12 21:40:17 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/04/12 21:54:06 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,15 +68,15 @@ t_arg	*last_access_sorting(t_arg *sorted, t_arg *arg_list)
 
 void			begin_sorting(t_arg **arg_list)
 {
-	t_arg	*sorted;
+	//t_arg	*sorted;
 
-	if (!(sorted = (t_arg*)malloc(sizeof(t_arg))))
-		mal_error();
-	else
-	{
-		ft_printf("HERE IS IT");
+	//if (!(sorted = (t_arg*)malloc(sizeof(t_arg))))
+	//	mal_error();
+	//else
+	//{
+		ft_printf("HERE IT IS");
 		if ((*arg_list)->info->flags.r)
-			ft_printf(" NO SHIT WITH r-flag\n");//	*arg_list = reverse_order(sorted, *arg_list);
+			ft_printf(" NO SHIT WITH r-flag\n");//*arg_list = reverse_order(sorted, *arg_list);
 		else if ((*arg_list)->info->flags.t)
 			ft_printf(" NO SHIT WITH t-flag\n");//*arg_list = time_sorting(sorted, *arg_list);
 		else if ((*arg_list)->info->flags.c)
@@ -85,6 +85,6 @@ void			begin_sorting(t_arg **arg_list)
 			ft_printf(" NO SHIT WITH u-flag\n");//*arg_list = last_access_sorting(sorted, *arg_list);
 		else
 			ft_printf(" NO SHIT WITH l-flag\n");//*arg_list = lexic_sorting(sorted, *arg_list);
-	}
+	//}
 	//generate_output(arg_list);
 }

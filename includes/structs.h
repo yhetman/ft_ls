@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yhetman <yhetman@student.unit.ua>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 17:55:18 by yhetman           #+#    #+#             */
-/*   Updated: 2019/04/12 20:58:11 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/04/13 23:48:18 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,6 @@
 
 # include "../libft/includes/libft.h"
 # include "ft_ls.h"
-
-typedef struct	timespec	t_timedif;
-/*
-	{
-		st_atim		-	time of last access
-		st_mtim		-	time of last modification
-		st_ctim		-	time of last status change
-	}
-*/
 
 typedef struct	dirent		t_dir;
 /*
@@ -124,15 +115,15 @@ typedef struct			s_ls
 	char				*direct;
 }						t_ls;
 
-typedef struct			s_arguments
+typedef struct			s_arg
 {
 	char				*name;
 	char				*way;
 	float				*blocks;
 	t_stat				*buff;
 	t_ls				*info;
-	struct s_arguments	*direct;
-	struct s_arguments	*next_arg;
+	struct s_arg		*direct;
+	struct s_arg		*next_arg;
 }						t_arg;
 
 #endif

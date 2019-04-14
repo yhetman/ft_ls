@@ -6,7 +6,7 @@
 #    By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/10 01:20:26 by yhetman           #+#    #+#              #
-#    Updated: 2019/04/13 16:16:50 by yhetman          ###   ########.fr        #
+#    Updated: 2019/04/14 20:41:15 by yhetman          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,12 +20,18 @@ LIB_PATH :=	libft/
 OBJ_PATH :=	obj/
 
 CC :=		clang
+
 CFLAGS :=	-g -Wall -Wextra -Werror
+
 IFLAGS :=	-I $(INC_PATH) -I $(LIB_PATH)
 
 LIB :=		$(LIB_PATH)libft.a
+
 HFILES :=	ft_ls structs
-FILES :=	ft_ls flags errors sortings swap_files adding
+
+FILES :=	ft_ls flags errors	\
+			sortings swap_files	\
+			adding dir
 
 HDRS :=		$(addprefix $(INC_PATH), $(addsuffix .h, $(HFILES)))
 SRCS :=		$(addprefix $(SRC_PATH), $(addsuffix .c, $(FILES)))
@@ -47,13 +53,17 @@ $(OBJ_PATH)%.o: %.c $(HDRS)
 
 clean: mclean
 	make clean -C $(LIB_PATH)
+	
 fclean: mfclean
 	make fclean -C $(LIB_PATH)
+	
 re: fclean all
 
 mclean:
 	rm -rf $(OBJ_PATH)
+	
 mfclean:
 	rm -f $(NAME)
 	rm -rf $(OBJ_PATH)
+	
 mre: mfclean all

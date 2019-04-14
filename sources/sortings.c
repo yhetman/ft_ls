@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sortings.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhetman <yhetman@student.unit.ua>          +#+  +:+       +#+        */
+/*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 22:36:03 by yhetman           #+#    #+#             */
-/*   Updated: 2019/04/13 23:55:33 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/04/14 20:24:38 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,11 @@ t_arg	*reverse_order(t_arg *arg_list)
 
 	if (!(sorted = (t_arg*)malloc(sizeof(t_arg))))
 		mal_error();
-	else
-	{
-		sorted->next_arg = arg_list;
-		while (arg_list && arg_list->next_arg)
-			((ft_strcmp(arg_list->name, arg_list->next_arg->name) > 0) 
-				? swap_files(sorted, arg_list, arg_list->next_arg)
-				: (arg_list = arg_list->next_arg));
-	}
+	sorted->next_arg = arg_list;
+	while (arg_list && arg_list->next_arg)
+		((ft_strcmp(arg_list->name, arg_list->next_arg->name) > 0) 
+			? swap_files(sorted, arg_list, arg_list->next_arg)
+			: (arg_list = arg_list->next_arg));
 	return (sorted->next_arg);
 }
 
@@ -35,14 +32,11 @@ t_arg	*lexic_sorting(t_arg *arg_list)
 
 	if (!(sorted = (t_arg*)malloc(sizeof(t_arg))))
 		mal_error();
-	else
-	{
-		sorted->next_arg = arg_list;
+	sorted->next_arg = arg_list;
 		while (arg_list && arg_list->next_arg)
 			((ft_strcmp(arg_list->name, arg_list->next_arg->name) < 0) 
 				? swap_files(sorted, arg_list, arg_list->next_arg)
 				: (arg_list = arg_list->next_arg));
-	}
 	return (sorted->next_arg);
 }
 
@@ -52,15 +46,12 @@ t_arg	*time_sorting(t_arg *arg_list)
 
 	if (!(sorted = (t_arg*)malloc(sizeof(t_arg))))
 		mal_error();
-	else
-	{
-		sorted->next_arg = arg_list;
-		while (arg_list && arg_list->next_arg)
-			((arg_list->buff->st_mtimespec.tv_nsec
-			> arg_list->next_arg->buff->st_mtimespec.tv_nsec)
-				? swap_files(sorted, arg_list, arg_list->next_arg)
-				: (arg_list = arg_list->next_arg));
-	}
+	sorted->next_arg = arg_list;
+	while (arg_list && arg_list->next_arg)
+		((arg_list->stbuf->st_mtimespec.tv_nsec
+		> arg_list->next_arg->stbuf->st_mtimespec.tv_nsec)
+			? swap_files(sorted, arg_list, arg_list->next_arg)
+			: (arg_list = arg_list->next_arg));
 	return (sorted->next_arg);
 }
 
@@ -70,15 +61,12 @@ t_arg	*last_change_sorting(t_arg *arg_list)
 
 	if (!(sorted = (t_arg*)malloc(sizeof(t_arg))))
 		mal_error();
-	else
-	{
-		sorted->next_arg = arg_list;
-		while (arg_list && arg_list->next_arg)
-			((arg_list->buff->st_ctimespec.tv_nsec
-			> arg_list->next_arg->buff->st_ctimespec.tv_nsec)
-				? swap_files(sorted, arg_list, arg_list->next_arg)
-				: (arg_list = arg_list->next_arg));
-	}
+	sorted->next_arg = arg_list;
+	while (arg_list && arg_list->next_arg)
+		((arg_list->stbuf->st_ctimespec.tv_nsec
+		> arg_list->next_arg->stbuf->st_ctimespec.tv_nsec)
+			? swap_files(sorted, arg_list, arg_list->next_arg)
+			: (arg_list = arg_list->next_arg));
 	return (sorted->next_arg);
 }
 
@@ -89,42 +77,41 @@ t_arg	*last_access_sorting(t_arg *arg_list)
 
 	if (!(sorted = (t_arg*)malloc(sizeof(t_arg))))
 		mal_error();
-	else
-	{
-		sorted->next_arg = arg_list;
-		while (arg_list && arg_list->next_arg)
-			((arg_list->buff->st_atimespec.tv_nsec
-			> arg_list->next_arg->buff->st_atimespec.tv_nsec)
-				? swap_files(sorted, arg_list, arg_list->next_arg)
-				: (arg_list = arg_list->next_arg));
-	}
+	sorted->next_arg = arg_list;
+	while (arg_list && arg_list->next_arg)
+		((arg_list->stbuf->st_atimespec.tv_nsec
+		> arg_list->next_arg->stbuf->st_atimespec.tv_nsec)
+			? swap_files(sorted, arg_list, arg_list->next_arg)
+			: (arg_list = arg_list->next_arg));
 	return (sorted->next_arg);
 }
 
 void		generate_output(t_arg *arg_list)
 {
-	t_timedif	*t;
-	t_group		*group;
-	t_passwd	*pass;
+	//t_timedif	*t;
+	//t_group		*group;
+	//t_passwd	*pass;
 
 	ft_printf("total %d/n", 5); //try
 	while(arg_list)
 	{
 		ft_printf("%s/n", arg_list->name);
-		arg_list = arg_list->next;
+		arg_list = arg_list->next_arg;
 	}
 }
-bool		begin_sorting(t_arg **arg_list)
+
+void		begin_sorting(t_arg **arg_list, t_flags **flags)
 {
-	if ((*arg_list)->info->flags.r)
-		*arg_list = reverse_order(sorted, *arg_list);
-	else if ((*arg_list)->info->flags.t)
-		*arg_list = time_sorting(sorted, *arg_list);
-	else if ((*arg_list)->info->flags.c)
-		*arg_list = last_change_sorting(sorted, *arg_list);
-	else if ((*arg_list)->info->flags.u)
-		*arg_list = last_access_sorting(sorted, *arg_list);
+	ft_printf("total %d/n", 1);
+	if ((*flags)->r == true)
+		*arg_list = reverse_order(*arg_list);
+	else if ((*flags)->t == true)
+		*arg_list = time_sorting(*arg_list);
+	else if ((*flags)->c == true)
+		*arg_list = last_change_sorting(*arg_list);
+	else if ((*flags)->u == true)
+		*arg_list = last_access_sorting(*arg_list);
 	else
-		*arg_list = lexic_sorting(sorted, *arg_list);
-	generate_output(arg_list);
+		*arg_list = lexic_sorting(*arg_list);
+	generate_output(*arg_list);
 }

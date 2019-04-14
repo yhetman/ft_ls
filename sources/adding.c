@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/13 16:01:40 by yhetman           #+#    #+#             */
-/*   Updated: 2019/04/13 16:19:14 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/04/14 20:09:07 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,25 @@
 
 static bool	statistic(t_arg *curr)
 {
-	t_stat		*buff;
+	t_stat		*stbuf;
 	t_passwd	*p;
 	t_group		*grp;
 
-	if (!(buff = (t_stat*)malloc(sizeof(t_stat)))
+	if (!(stbuf = (t_stat*)malloc(sizeof(t_stat)))
 		|| !(p = (t_passwd*)malloc(sizeof(t_passwd)))
 		|| !(grp = (t_group*)malloc(sizeof(t_group))))
 		mal_error();
 	else
 	{
-		if (lstat(find_way(curr->way, curr->name), buff) < 0)
+		if (lstat(find_way(curr->way, curr->name), stbuf) < 0)
 			link_error();
-		curr->buff = buff;
-		p = getpwuid(curr->buff->st_uid);
-		if (curr->info->longest < (int)ft_nbrlen(curr->buff->st_size))
-			curr->info->longest = (int)ft_nbrlen(curr->buff->st_size);
+		curr->stbuf = stbuf;
+		p = getpwuid(curr->stbuf->st_uid);
+		if (curr->info->longest < (int)ft_nbrlen(curr->stbuf->st_size))
+			curr->info->longest = (int)ft_nbrlen(curr->stbuf->st_size);
 		if (curr->info->longest_w < (int)LEN(p->pw_name))
 			curr->info->longest_w = (int)LEN(p->pw_name);
-		grp = getgrgid(curr->buff->st_gid);
+		grp = getgrgid(curr->stbuf->st_gid);
 		if (curr->info->longest_g < (int)LEN(grp->gr_name))
 			curr->info->longest_g = (int)LEN(grp->gr_name);
 		return (true);
@@ -49,7 +49,7 @@ static bool	doublicate_info(t_arg *ls_list, t_dir *dir,
 	if (statistic(curr) &&
 		(!(find_hidden_fd(ls_list->info, curr->name))))
 		{
-			*(curr->blocks) += (float)curr->buff->st_size / 512;
+			*(curr->blocks) += (float)curr->stbuf->st_size / 512;
 			return (true);
 		}
 	else

@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 22:02:40 by yhetman           #+#    #+#             */
-/*   Updated: 2019/04/13 16:40:33 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/04/14 20:39:07 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,13 @@ bool	direct_error(void);
 void	link_error(void);
 
 /******		sortings.c		******/
-bool	begin_sorting(t_arg **arg_list); // -r , -l , -t , -c , -u
+void	begin_sorting(t_arg **arg_list, t_flags **flags); // -r , -l , -t , -c , -u
+void	generate_output(t_arg *arg_list);
 
+/******		dir.c			******/
+void		get_dir(t_arg *arg_list);
+
+/******		ft_ls.c			******/
 char	*find_way(char *way, char *dir);
 bool	find_hidden_fd(t_ls *ls, char *line);
 

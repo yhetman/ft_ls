@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yhetman <yhetman@student.unit.ua>          +#+  +:+       +#+        */
+/*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 17:55:18 by yhetman           #+#    #+#             */
-/*   Updated: 2019/04/13 23:48:18 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/04/14 20:22:56 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ typedef struct	s_flags
 
 typedef struct			s_ls
 {
-	t_flags				flags;
+	t_flags				*flags;
 	int					longest;
 	int					longest_w;
 	int					longest_g;
@@ -120,7 +120,7 @@ typedef struct			s_arg
 	char				*name;
 	char				*way;
 	float				*blocks;
-	t_stat				*buff;
+	t_stat				*stbuf;
 	t_ls				*info;
 	struct s_arg		*direct;
 	struct s_arg		*next_arg;

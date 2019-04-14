@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 22:00:17 by yhetman           #+#    #+#             */
-/*   Updated: 2019/04/13 16:45:21 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/04/14 20:44:38 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*find_way(char *way, char *dir)
 
 bool	find_hidden_fd(t_ls *ls, char *line)
 {
-	if (ls->flags.a)
+	if (ls->flags->a)
 		return(false);
 	else if (*line == '.')
 		return(true);
@@ -66,27 +66,27 @@ int		ft_ls(t_ls *ls)
 	DIR		*fd;
 	t_dir	*direct;
 	t_arg	*memorized;
-	t_arg	*ls_list;
+	t_arg	*arg_list;
 
 	if (!(fd = opendir(ls->direct)))
 		return (direct_error());
-	if (!in(&ls_list))
+	if (!in(&arg_list))
 		return (false);
-	memorized = ls_list;
-	ls_list->way = find_way(ls_list->way, ls->direct);
+	memorized = arg_list;
+	arg_list->way = find_way(arg_list->way, ls->direct);
 	while ((direct = (t_dir *)readdir(fd)) || closedir(fd))
 	{
 		if(find_hidden_fd(ls, direct->d_name))
 			continue ;
-		ls_list->info = ls;
-		adding(ls_list, direct, &ls_list);
-		if (ls_list->next_arg)
-			ls_list = ls_list->next_arg;
+		arg_list->info = ls;
+		adding(arg_list, direct, &arg_list);
+		if (arg_list->next_arg)
+			arg_list = arg_list->next_arg;
 	}
-	if (begin_sorting(&memorized))
-		return (true);
-	else
-		return (false);
+	begin_sorting(&memorized, &(memorized->info->flags));
+	if (arg_list->info->flags->rr)
+		get_dir(memorized);
+	return (true);
 }
 
 t_ls	get_arguments(t_ls *ls, int argc, char **argv)

@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 01:31:44 by yhetman           #+#    #+#             */
-/*   Updated: 2019/04/12 20:24:15 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/04/14 20:25:38 by yhetman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,36 +26,36 @@ static void	print_help(void)
 	exit(EXIT_SUCCESS);
 }
 
-static void	define_flags(char str, t_flags *flags)
+static void	define_flags(char str, t_flags **flags)
 {
 	if (str == 'l')
-		flags->l = true;
+		(*flags)->l = true;
 	else if (str == 'r')
-		flags->r = true;
+		(*flags)->r = true;
 	else if (str == 'R')
-		flags->rr = true;
+		(*flags)->rr = true;
 	else if (str == 'a')
-		flags->a = true;
+		(*flags)->a = true;
 	else if (str == 't')
-		flags->t = true;
+		(*flags)->t = true;
 	else if (str == 'g')
-		flags->g = true;
+		(*flags)->g = true;
 	else if (str == 'c')
-		flags->c = true;
+		(*flags)->c = true;
 	else if (str == 'A')
-		flags->aa = true;
+		(*flags)->aa = true;
 	else if (str == 'L')
-		flags->ll = true;
+		(*flags)->ll = true;
 	else if (str == 'C')
-		flags->cc = true;
+		(*flags)->cc = true;
 	else if (str == 'G')
-		flags->gg = true;
+		(*flags)->gg = true;
 	else if (str == 'u')
-		flags->u = true;
+		(*flags)->u = true;
 	else if (str == 'f')
-		(flags->f = true) && (flags->a = true);
+		((*flags)->f = true) && ((*flags)->a = true);
 	else if (str == 'd')
-		flags->d = true;
+		(*flags)->d = true;
 	else
 		return ;
 }

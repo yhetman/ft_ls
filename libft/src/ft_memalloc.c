@@ -6,7 +6,7 @@
 /*   By: yhetman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/29 17:46:14 by yhetman           #+#    #+#             */
-/*   Updated: 2018/10/29 17:46:23 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/18 17:44:57 by blukasho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	*ft_memalloc(size_t size)
 	i = -1;
 	if (!(memory = malloc(size)))
 		return (NULL);
-	while (++i < size)
-		((unsigned char *)memory)[i] = '\0';
+	ft_bzero(memory, sizeof(void));
 	return (memory);
 }

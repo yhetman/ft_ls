@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 22:36:03 by yhetman           #+#    #+#             */
-/*   Updated: 2019/04/14 20:24:38 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/18 18:02:05 by blukasho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ void		generate_output(t_arg *arg_list)
 
 void		begin_sorting(t_arg **arg_list, t_flags **flags)
 {
+	if (!(*flags))
+		return;
 	ft_printf("total %d/n", 1);
 	if ((*flags)->r == true)
 		*arg_list = reverse_order(*arg_list);

@@ -6,7 +6,7 @@
 /*   By: yhetman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/25 16:19:48 by yhetman           #+#    #+#             */
-/*   Updated: 2018/10/25 16:30:56 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/18 17:42:23 by blukasho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_bzero(void *s, size_t n)
 	unsigned char	*str;
 
 	str = (unsigned char*)s;
-	i = -1;
-	while (++i < n)
-		str[i] = '\0';
+	i = 0;
+	while (i < n)
+		str[i++] = '\0';
 }

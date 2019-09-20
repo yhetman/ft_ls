@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/13 16:01:40 by yhetman           #+#    #+#             */
-/*   Updated: 2019/04/14 20:09:07 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/18 17:59:29 by blukasho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ bool	adding(t_arg *ls_list, t_dir *direct, t_arg **ls_list_ptr)
 	{
 		if (!(curr = (t_arg*)malloc(sizeof(t_arg))))
 			mal_error();
+		ft_bzero(curr, sizeof(t_arg));
 		(*ls_list_ptr)->next_arg = curr;
 		curr->blocks = (*ls_list_ptr)->blocks;
 		curr->way = (*ls_list_ptr)->way;
@@ -73,8 +74,9 @@ bool	adding(t_arg *ls_list, t_dir *direct, t_arg **ls_list_ptr)
 	{
 		curr = (*ls_list_ptr);
 		free(curr->blocks);
-		if (!(curr->blocks = (float*)malloc(sizeof(float))))
+		if (!(curr->blocks = (float *)malloc(sizeof(float))))
 			mal_error();
+		ft_bzero(curr->blocks, sizeof(float));
 	}
 	return (doublicate_info(ls_list, direct, ls_list_ptr, curr));
 }

@@ -6,7 +6,7 @@
 #    By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/10 01:20:26 by yhetman           #+#    #+#              #
-#    Updated: 2019/04/14 20:41:15 by yhetman          ###   ########.fr        #
+#    Updated: 2019/09/18 17:22:54 by blukasho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ OBJ_PATH :=	obj/
 
 CC :=		clang
 
-CFLAGS :=	-g -Wall -Wextra -Werror
+CFLAGS :=	-g3 -Wall -Wextra -Werror -fsanitize=address
 
 IFLAGS :=	-I $(INC_PATH) -I $(LIB_PATH)
 

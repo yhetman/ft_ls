@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 22:00:17 by yhetman           #+#    #+#             */
-/*   Updated: 2019/04/14 20:44:38 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/18 18:46:03 by blukasho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,28 +37,20 @@ char	*find_way(char *way, char *dir)
 
 bool	find_hidden_fd(t_ls *ls, char *line)
 {
-	if (ls->flags->a)
+	if (ls && ls->flags && ls->flags->a)
 		return(false);
 	else if (*line == '.')
 		return(true);
-	else
-		return(false);
+	return (false);
 }
 
-bool	in(t_arg **ls_list)
+static t_arg	*in(void)
 {
-	if (ls_list)
-	{
-		*ls_list = (t_arg *)ft_memalloc(sizeof(t_arg));
-		if (!ls_list)
-		{
-			mal_error();
-			return (false);
-		}
-		return (true);
-	}
-	else
-		return (false);
+	t_arg		*out;
+
+	out = (t_arg *)malloc(sizeof(t_arg));
+	ft_bzero(out, sizeof(t_arg));
+	return (out);
 }
 
 int		ft_ls(t_ls *ls)
@@ -70,7 +62,7 @@ int		ft_ls(t_ls *ls)
 
 	if (!(fd = opendir(ls->direct)))
 		return (direct_error());
-	if (!in(&arg_list))
+	if (!(arg_list = in()))
 		return (false);
 	memorized = arg_list;
 	arg_list->way = find_way(arg_list->way, ls->direct);
@@ -84,7 +76,7 @@ int		ft_ls(t_ls *ls)
 			arg_list = arg_list->next_arg;
 	}
 	begin_sorting(&memorized, &(memorized->info->flags));
-	if (arg_list->info->flags->rr)
+	if (arg_list->info->flags && arg_list->info->flags->rr)
 		get_dir(memorized);
 	return (true);
 }

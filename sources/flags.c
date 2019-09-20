@@ -6,7 +6,7 @@
 /*   By: yhetman <yhetman@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 01:31:44 by yhetman           #+#    #+#             */
-/*   Updated: 2019/04/14 20:25:38 by yhetman          ###   ########.fr       */
+/*   Updated: 2019/09/18 18:54:51 by blukasho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ static void	print_help(void)
 
 static void	define_flags(char str, t_flags **flags)
 {
+	if (!flags || !(*flags))
+		return;
 	if (str == 'l')
 		(*flags)->l = true;
 	else if (str == 'r')
